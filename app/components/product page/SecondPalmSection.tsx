@@ -7,7 +7,6 @@ export default function SecondPalmSection() {
         <section className=" md:mx-0 mx-4 mb-8">
             <div className="rounded-2xl container border border-[#D0D0D0]">
                 <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 md:py-20 md:px-9 px-4 py-5 ">
-                    {/* Left Text Section */}
                     <div className="flex-1">
                         <h2 className="text-4xl md:text-5xl font-semibold text-gray-900 leading-tight">
                             Your Palm. <span className="text-blue-600">Your<br className="hidden md:block" /> Ecosystem</span>

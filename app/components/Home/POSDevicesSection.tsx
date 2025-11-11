@@ -86,7 +86,7 @@ const DeviceCard: React.FC<{ device: POSDevice }> = ({ device }) => {
           className="object-cover max-h-full w-full"
         /> */}
         <Image
-         src={device.imageSrc}
+          src={device.imageSrc}
           alt={device.name}
           className="object-cover max-h-full w-full"
           width={461}
@@ -127,8 +127,7 @@ const AutoSlidingPOSDevices: React.FC = () => {
           <h2>
             Designed for <span className="text-[#0070F3]">everyday India</span>
             <br />
-            Built for tomorrow's economy.
-          </h2>
+            {"Built for tomorrow's economy."}          </h2>
           <p className="mt-4 text-lg max-w-lg">
             One core palm module powers six devices—from metros to malls, from Kiranas to kiosks.
           </p>

@@ -6,7 +6,6 @@ const ScalableSection: React.FC = () => {
     <section className="relative h-screen flex items-end bg-cover bg-center bg-no-repeat py-20 px-4"
       style={{ backgroundImage: "url('/Group 1000005197.png')" }}
     >
-      {/* Overlay (optional for tint) */}
       <div className="absolute inset-0 bg-black/30 z-10"></div>
 
       <div className="max-w-7xl mx-auto space-y-6 z-20 relative">

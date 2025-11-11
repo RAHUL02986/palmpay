@@ -1,15 +1,15 @@
 'use client';
+
 import React, { useRef, useCallback } from 'react';
-// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
+import type { Swiper as SwiperType } from 'swiper';
 import Image from 'next/image';
-// Import Swiper modules
 import { Navigation, Pagination, A11y, Autoplay } from 'swiper/modules';
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+
 interface AdvantageCardProps {
   title: string;
   description: string;
@@ -18,8 +18,7 @@ interface AdvantageCardProps {
 
 const AdvantageCard: React.FC<AdvantageCardProps> = ({ title, description, imageSrc }) => (
   <div className="flex flex-col md:flex-row items-center bg-white rounded-xl md:p-8 p-4 space-y-8 md:space-y-0 md:space-x-12 shadow-lg">
-    <div className="md:w-6/12 ">
-      
+    <div className="md:w-6/12">
       <Image
         src={imageSrc}
         alt={`Illustration for ${title}`}
@@ -34,36 +33,36 @@ const AdvantageCard: React.FC<AdvantageCardProps> = ({ title, description, image
     </div>
   </div>
 );
+
 const AdvantageSection: React.FC = () => {
-  const swiperRef = useRef<any>(null);
+  const swiperRef = useRef<SwiperType | null>(null);
 
   const handlePrev = useCallback(() => {
-    if (swiperRef.current?.swiper) {
-      swiperRef.current.swiper.slidePrev();
-    }
+    swiperRef.current?.slidePrev();
   }, []);
 
   const handleNext = useCallback(() => {
-    if (swiperRef.current?.swiper) {
-      swiperRef.current.swiper.slideNext();
-    }
+    swiperRef.current?.slideNext();
   }, []);
 
   const advantages = [
     {
-      title: "Offline Ready",
-      description: "Transactions process even without internet - sync automatically when connected. Our powerful local storage ensures zero disruption.",
-      imageSrc: "/Rectangle 4488.png",
+      title: 'Offline Ready',
+      description:
+        'Transactions process even without internet - sync automatically when connected. Our powerful local storage ensures zero disruption.',
+      imageSrc: '/Rectangle 4488.png',
     },
     {
-      title: "Secure Payments",
-      description: "Industry-leading, AES-256 encryption keeps all your transactions safe and sound, complying with global security standards.",
-      imageSrc: "/Rectangle 4488.png",
+      title: 'Secure Payments',
+      description:
+        'Industry-leading, AES-256 encryption keeps all your transactions safe and sound, complying with global security standards.',
+      imageSrc: '/Rectangle 4488.png',
     },
     {
-      title: "Seamless Integration",
-      description: "Easily connect with your existing systems and workflows via our open API, enabling smooth data flow and centralized management.",
-      imageSrc: "/Rectangle 4488.png",
+      title: 'Seamless Integration',
+      description:
+        'Easily connect with your existing systems and workflows via our open API, enabling smooth data flow and centralized management.',
+      imageSrc: '/Rectangle 4488.png',
     },
   ];
 
@@ -80,28 +79,24 @@ const AdvantageSection: React.FC = () => {
       <div className="relative max-w-7xl mx-auto">
         <div
           className="relative"
-
           style={{
             '--swiper-pagination-color': '#0070F3',
             '--swiper-pagination-bullet-inactive-color': '#E5E7EB',
             '--swiper-pagination-bullet-inactive-opacity': '1',
-
             '--swiper-pagination-bullet-width': '40px',
             '--swiper-pagination-bullet-height': '8px',
             '--swiper-pagination-bullet-border-radius': '4px',
-
             '--swiper-pagination-bottom': '0px',
             '--swiper-navigation-size': '24px',
           } as React.CSSProperties}
         >
           <Swiper
-            ref={swiperRef}
+            onSwiper={(swiper) => (swiperRef.current = swiper)}
             modules={[Navigation, Pagination, A11y, Autoplay]}
             spaceBetween={20}
             slidesPerView={1}
             pagination={{ clickable: true }}
             loop={true}
-            className="mySwiper"
             autoplay={{
               delay: 4000,
               disableOnInteraction: false,
@@ -111,6 +106,7 @@ const AdvantageSection: React.FC = () => {
                 slidesPerView: 1,
               },
             }}
+            className="mySwiper"
           >
             {advantages.map((advantage, index) => (
               <SwiperSlide key={index}>
@@ -122,6 +118,7 @@ const AdvantageSection: React.FC = () => {
           </Swiper>
         </div>
 
+        {/* Navigation buttons */}
         <div className="absolute top-1/2 -translate-y-1/2 w-full flex justify-between z-10 pointer-events-none">
           <button
             onClick={handlePrev}
