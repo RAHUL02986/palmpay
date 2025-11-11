@@ -53,7 +53,7 @@ export interface ButtonProps
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant, size, asChild = false, href, children, ...props }, ref) => {
-    const Comp: any = href ? Link : asChild ? Slot : "button";
+    const Comp = (href ? Link : asChild ? Slot : "button") as React.ElementType;
 
     return (
       <Comp
@@ -63,9 +63,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {variant === "outline" ? (
-          <span>
-            {children}
-          </span>
+          <span>{children}</span>
         ) : (
           children
         )}
@@ -73,6 +71,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     );
   }
 );
+
 
 Button.displayName = "Button";
 

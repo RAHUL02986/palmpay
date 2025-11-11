@@ -1,13 +1,11 @@
 'use client';
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-// Note: Pagination and Autoplay are required modules for this setup
-const { Pagination, Autoplay } = require('swiper/modules');
+import { Pagination, Autoplay } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-// --- CardData Interface and Icon Definitions (Unchanged) ---
 interface CardData {
   title: string;
   description: string;
@@ -66,9 +64,6 @@ const Card: React.FC<{ data: CardData }> = ({ data }) => (
     </p>
   </div>
 );
-// --- End Card/Icon Definitions ---
-
-
 const PalmPeSlider: React.FC = () => {
   return (
     <div className="w-full lg:py-40 py-10 px-2 bg-gray-50">

@@ -6,6 +6,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Button } from '../ui/button';
+import Image from 'next/image';
 interface POSDevice {
   id: number;
   name: string;
@@ -79,10 +80,17 @@ const DeviceCard: React.FC<{ device: POSDevice }> = ({ device }) => {
   return (
     <div className={`flex flex-col h-full rounded-2xl border bg-[#FFFFFF]/10 border-gray-100 gap-7`}>
       <div className="relative flex justify-center items-center h-100">
-        <img
+        {/* <img
           src={device.imageSrc}
           alt={device.name}
           className="object-cover max-h-full w-full"
+        /> */}
+        <Image
+         src={device.imageSrc}
+          alt={device.name}
+          className="object-cover max-h-full w-full"
+          width={461}
+          height={573}
         />
       </div>
 
@@ -100,7 +108,7 @@ const DeviceCard: React.FC<{ device: POSDevice }> = ({ device }) => {
             <Button className="text-[#0070F3]">
               View Now
             </Button>
-            
+
             <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
               <path d="M0.161143 9.12599C-0.0419117 9.31314 -0.0548083 9.62946 0.132337 9.83251C0.319483 10.0356 0.635803 10.0485 0.838857 9.86131L0.5 9.49365L0.161143 9.12599ZM10.5588 0.703733C10.5701 0.42782 10.3555 0.195029 10.0796 0.18378L5.58333 0.000463752C5.30742 -0.0107856 5.07463 0.203767 5.06338 0.47968C5.05213 0.755593 5.26668 0.988384 5.54259 0.999634L9.53927 1.16258L9.37633 5.15926C9.36508 5.43517 9.57963 5.66797 9.85554 5.67921C10.1315 5.69046 10.3642 5.47591 10.3755 5.2L10.5588 0.703733ZM0.5 9.49365L0.838857 9.86131L10.3981 1.05103L10.0592 0.683365L9.72037 0.315702L0.161143 9.12599L0.5 9.49365Z" fill="#0070F3" />
             </svg>
@@ -220,7 +228,7 @@ const AutoSlidingPOSDevices: React.FC = () => {
         .swiper-button-next {
           display: none !important;
         }
-      `}</style>     
+      `}</style>
     </section>
   );
 };

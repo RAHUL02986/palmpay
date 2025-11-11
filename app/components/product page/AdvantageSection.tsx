@@ -2,17 +2,14 @@
 import React, { useRef, useCallback } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Image from 'next/image';
 // Import Swiper modules
 import { Navigation, Pagination, A11y, Autoplay } from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-// Import icons for custom navigation
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'; 
-
-// --- ADVANTAGE CARD COMPONENT ---
-
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 interface AdvantageCardProps {
   title: string;
   description: string;
@@ -20,13 +17,15 @@ interface AdvantageCardProps {
 }
 
 const AdvantageCard: React.FC<AdvantageCardProps> = ({ title, description, imageSrc }) => (
-  // Reduced space-x-12 to only apply on medium screens
   <div className="flex flex-col md:flex-row items-center bg-white rounded-xl md:p-8 p-4 space-y-8 md:space-y-0 md:space-x-12 shadow-lg">
     <div className="md:w-6/12 ">
-      <img
+      
+      <Image
         src={imageSrc}
         alt={`Illustration for ${title}`}
         className="rounded-lg w-full h-auto object-cover"
+        width={510}
+        height={318}
       />
     </div>
     <div className="md:w-6/12 text-center md:text-left md:space-y-3 space-y-1">
@@ -35,14 +34,9 @@ const AdvantageCard: React.FC<AdvantageCardProps> = ({ title, description, image
     </div>
   </div>
 );
-
-// --- ADVANTAGE SECTION COMPONENT ---
-
 const AdvantageSection: React.FC = () => {
-  // Ref to store the Swiper instance
   const swiperRef = useRef<any>(null);
 
-  // Handlers for custom navigation
   const handlePrev = useCallback(() => {
     if (swiperRef.current?.swiper) {
       swiperRef.current.swiper.slidePrev();
@@ -83,37 +77,28 @@ const AdvantageSection: React.FC = () => {
         </h2>
       </div>
 
-      {/* Main container for Swiper and custom navigation/pagination */}
       <div className="relative max-w-7xl mx-auto">
         <div
           className="relative"
-          // **CORRECTED PAGINATION STYLING VIA SWIPER CSS VARIABLES**
-          // This uses Swiper's variables to create the pill shape and colors
+
           style={{
-            // Active bullet color (Blue from your image)
             '--swiper-pagination-color': '#0070F3',
-            // Inactive bullet background color (Light Gray from your image)
             '--swiper-pagination-bullet-inactive-color': '#E5E7EB',
-            // Ensure inactive bullet opacity is 1 so the color shows fully
-            '--swiper-pagination-bullet-inactive-opacity': '1', 
-            
-            // Set dimensions for the pill shape
+            '--swiper-pagination-bullet-inactive-opacity': '1',
+
             '--swiper-pagination-bullet-width': '40px',
             '--swiper-pagination-bullet-height': '8px',
-            '--swiper-pagination-bullet-border-radius': '4px', // Pill shape rounding
-            
-            // Positioning (kept from previous code)
+            '--swiper-pagination-bullet-border-radius': '4px',
+
             '--swiper-pagination-bottom': '0px',
             '--swiper-navigation-size': '24px',
           } as React.CSSProperties}
         >
           <Swiper
-            // 1. Assign the ref to the Swiper instance
             ref={swiperRef}
             modules={[Navigation, Pagination, A11y, Autoplay]}
             spaceBetween={20}
             slidesPerView={1}
-            // 2. Navigation prop is removed since we use custom buttons
             pagination={{ clickable: true }}
             loop={true}
             className="mySwiper"
@@ -129,37 +114,31 @@ const AdvantageSection: React.FC = () => {
           >
             {advantages.map((advantage, index) => (
               <SwiperSlide key={index}>
-                {/* Added padding to prevent pagination from overlapping the card */}
-                <div className="pb-12 pt-4 px-2 sm:px-4"> 
-                    <AdvantageCard {...advantage} />
+                <div className="pb-12 pt-4 px-2 sm:px-4">
+                  <AdvantageCard {...advantage} />
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
 
-        {/* --- CUSTOM NAVIGATION CONTROLS (OUTSIDE THE BOX) --- */}
         <div className="absolute top-1/2 -translate-y-1/2 w-full flex justify-between z-10 pointer-events-none">
-          {/* Previous Button (Left) */}
           <button
             onClick={handlePrev}
             className="p-3 bg-[#ffffff] border border-[#00000038] rounded-full shadow-lg transition duration-300 md:-ml-10 pointer-events-auto disabled:opacity-50 hover:border-[#0070F3] hover:shadow-xl"
             aria-label="Previous slide"
           >
-            {/* Icon color set to black */}
             <FaChevronLeft className="md:w-5 w-3 md:h-5 h-3 text-black" />
           </button>
 
-          {/* Next Button (Right) */}
           <button
             onClick={handleNext}
             className="p-3 bg-[#ffffff] border border-[#00000038] rounded-full shadow-lg transition duration-300 md:-mr-10 pointer-events-auto disabled:opacity-50 hover:border-[#0070F3] hover:shadow-xl"
             aria-label="Next slide"
           >
-            {/* Icon color set to black */}
             <FaChevronRight className="md:w-5 w-3 md:h-5 h-3 text-black" />
           </button>
-        </div>        
+        </div>
       </div>
     </section>
   );
